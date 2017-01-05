@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>NOOB.lazyload</title>
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+	<link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="image-grid grid">
+			<div class="grid-item lazywrapper"><img data-lazy="images/01.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img data-lazy="images/02.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img data-lazy="images/03.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img data-lazy="images/04.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img data-lazy="images/05.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img data-lazy="images/06.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img data-lazy="images/07.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img data-lazy="images/08.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img data-lazy="images/09.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img data-lazy="images/10.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img data-lazy="images/11.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img data-lazy="images/12.jpg" alt=""><i></i></div>
+		</div>
+	</div>
+	<div class="lazy-control">
+		<a>LOAD IMAGE</a>
+	</div>
+	<script>
+		// Progress
+		function lazyload(elem) {
+
+		    var lazyItem = $('img[data-lazy]')
+
+		    function loadCheck() {
+		        if(this.complete) {
+		            this.setAttribute('class', 'lazyloaded')
+		            this.removeAttribute('data-lazy')
+		        }
+		    }
+
+		    lazyItem.each(function() {
+		        var lazySrc = this.getAttribute('data-lazy')
+		        this.setAttribute('src', lazySrc)
+		    }).on('load', loadCheck)
+		}
+		$('.lazy-control a').on('click',function() {
+			lazyload()
+			$(this).parent().addClass('close')
+		})
+	</script>	
+</body>
+</html>
