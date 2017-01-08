@@ -3,9 +3,40 @@
 body {
 	margin: 0;
 	padding: 0;
+	background: hsl(0,0%,20%);
 	font-family: arial, sans-serif;
 }
+@keyframes arrowDown {
+	from {
+		top: 100%;
+	}
+	to {
+		top: 150%;
+		opacity: 0;
+	}
+}
+h1 {
+	position: absolute;
+	top: 30%; left: 50%;
+	margin-left: -400px;
+	width: 800px;
+	text-align: center;
+	font-size: 96px;
+	color: #FFF;
+	&:before {
+		content: "";
+		position: absolute;
+		top: 100%; left: 50%;
+		margin-left: -30px;
+		border-top: 30px solid #FFF;
+		border-left: 30px solid transparent;
+		border-right: 30px solid transparent;
+		animation: arrowDown 1s linear infinite;
+	}
+}
 .wrapper {
+	position: absolute;
+	top: 95%;
 	.grid {
 		margin: 12px auto;
 		width: 1280px;
@@ -14,6 +45,7 @@ body {
 			margin: 4px;
 			width: 312px;
 			height: 312px;
+			@include box-shadow(0px 0px 6px hsla(0,0%,0%,.75));
 		}
 		img {
 			display: block;

@@ -7,47 +7,59 @@
 	<link rel="stylesheet" href="stylesheets/style.css">
 </head>
 <body>
+	<h1>Scroll Down</h1>
 	<div class="wrapper">
 		<div class="image-grid grid">
-			<div class="grid-item lazywrapper"><img data-lazy="images/01.jpg" alt=""><i></i></div>
-			<div class="grid-item lazywrapper"><img data-lazy="images/02.jpg" alt=""><i></i></div>
-			<div class="grid-item lazywrapper"><img data-lazy="images/03.jpg" alt=""><i></i></div>
-			<div class="grid-item lazywrapper"><img data-lazy="images/04.jpg" alt=""><i></i></div>
-			<div class="grid-item lazywrapper"><img data-lazy="images/05.jpg" alt=""><i></i></div>
-			<div class="grid-item lazywrapper"><img data-lazy="images/06.jpg" alt=""><i></i></div>
-			<div class="grid-item lazywrapper"><img data-lazy="images/07.jpg" alt=""><i></i></div>
-			<div class="grid-item lazywrapper"><img data-lazy="images/08.jpg" alt=""><i></i></div>
-			<div class="grid-item lazywrapper"><img data-lazy="images/09.jpg" alt=""><i></i></div>
-			<div class="grid-item lazywrapper"><img data-lazy="images/10.jpg" alt=""><i></i></div>
-			<div class="grid-item lazywrapper"><img data-lazy="images/11.jpg" alt=""><i></i></div>
-			<div class="grid-item lazywrapper"><img data-lazy="images/12.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img class="lazyload" data-lazy="images/01.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img class="lazyload" data-lazy="images/02.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img class="lazyload" data-lazy="images/03.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img class="lazyload" data-lazy="images/04.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img class="lazyload" data-lazy="images/05.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img class="lazyload" data-lazy="images/06.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img class="lazyload" data-lazy="images/07.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img class="lazyload" data-lazy="images/08.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img class="lazyload" data-lazy="images/09.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img class="lazyload" data-lazy="images/10.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img class="lazyload" data-lazy="images/11.jpg" alt=""><i></i></div>
+			<div class="grid-item lazywrapper"><img class="lazyload" data-lazy="images/12.jpg" alt=""><i></i></div>
 		</div>
 	</div>
-	<div class="lazy-control">
-		<a>LOAD IMAGE</a>
-	</div>
 	<script>
-		// Progress
-		function lazyload(elem) {
+		// Lazyload
+		function lazyLoad() {
 
-		    var lazyItem = $('img[data-lazy]')
+    	var $lazyItem = $('img.lazyload')
 
-		    function loadCheck() {
-		        if(this.complete) {
-		            this.setAttribute('class', 'lazyloaded')
-		            this.removeAttribute('data-lazy')
-		        }
-		    }
+	    // Check lazyloaded
+	    function loadCheck() {
+        if(this.complete) {
+          this.setAttribute('class', 'lazyloaded')
+          this.removeAttribute('data-lazy')
+        }
+	    }
 
-		    lazyItem.each(function() {
-		        var lazySrc = this.getAttribute('data-lazy')
-		        this.setAttribute('src', lazySrc)
-		    }).on('load', loadCheck)
+
+	    // lazyLoad at window scroll
+	    var windowHeight = $(window).height()
+	    
+	    $(window).scroll(function() {
+				var scrollNow = $(window).scrollTop();
+
+				// lazyload Images
+				$lazyItem.each(function() {
+	    		var lazyOffset = $(this).offset().top
+
+          if (lazyOffset <= scrollNow + windowHeight) {
+          	var lazySrc = $(this).data('lazy')
+	        	this.setAttribute('src', lazySrc)
+          }
+
+				}).on('load', loadCheck)
+
+	    })
 		}
-		$('.lazy-control a').on('click',function() {
-			lazyload()
-			$(this).parent().addClass('close')
-		})
+
+		lazyLoad()
 	</script>	
 </body>
 </html>
