@@ -43,11 +43,13 @@ h1:before {
 .wrapper {
   position: absolute;
   top: 95%;
+  width: 100%;
 }
 /* line 40, ../sass/style.scss */
 .wrapper .grid {
   margin: 12px auto;
   width: 1280px;
+  overflow: hidden;
 }
 /* line 43, ../sass/style.scss */
 .wrapper .grid .grid-item {
